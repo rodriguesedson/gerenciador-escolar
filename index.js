@@ -1,9 +1,31 @@
 var prompt = require('prompt-sync')();
 
-let alunos = [];
+let alunos = [
+  {
+    matricula: 1, 
+    nome: 'Mateus', 
+    materias: [
+      {
+        numero: 1,
+        nome: 'Port',
+        nota1: null,
+        nota2: null,
+        nota3: null,
+        faltas: 0
+      }
+    ]
+  }
+];
 
-// Opções do menu
-// 1 - CADASTRAR ALUNO
+/*
+  Opções do menu
+*/
+
+/*
+
+1 - CADASTRAR ALUNO
+
+*/
 function cadastrarAluno() {
   //solicitar nome do aluno
   let nomeAluno = prompt('Digite o nome do aluno: ');
@@ -15,7 +37,11 @@ function cadastrarAluno() {
   alunos.push(novoAluno);
 }
 
-// 2 - CADASTRAR MATÉRIAS
+/*
+
+2 - CADASTRAR MATÉRIAS
+
+*/
 function cadastrarMaterias() {
   //exibe lista de alunos e solicita matrícula desejada
   exibirAlunos();
@@ -28,13 +54,13 @@ function cadastrarMaterias() {
       do {
         //solicitar no mínimo 3 matérias
         if (i < 3) {
-          console.log('Matéria ' + i);
+          console.log(`Matéria ${i + 1}`);
           incluirMateria(aluno);
         } else {
           //verificar se deseja cadastrar mais matérias
           continuar = solicitarNumero('continuar');
           if (continuar) {
-            console.log('Matéria ' + i);
+            console.log(`Matéria ${i + 1}`);
             incluirMateria(aluno);
           }
         }
@@ -50,7 +76,11 @@ function incluirMateria(aluno) {
   aluno.materias.push(novaMateria);
 }
 
-// 3 - CADASTRAR NOTAS
+/*
+
+3 - CADASTRAR NOTAS
+
+*/
 function cadastrarNotas() {
   //solicitar 3 notas por matéria
   exibirAlunos();
@@ -65,13 +95,8 @@ function cadastrarNotas() {
         if (numeroMateria === materia.numero) {
           // solicitar as 3 notas e cadastrar
           for (let i = 0; i < 3; i++) {
-            let novaNota;
-            do {
-              novaNota = +prompt(`Digite a nota ${i + 1}: `);
-              if (typeof(novaNota) == NaN) {
-                console.log('Digite apenas valores numéricos.');
-              }
-            } while (typeof(novaNota) == NaN);
+            console.log(`Digite a nota ${i + 1}`);
+            let novaNota = solicitarNumero('nota');
             materia['nota'+(i + 1)] = novaNota;
             console.log(`
             ${materia.nome}:
@@ -84,7 +109,11 @@ function cadastrarNotas() {
   })
 }
 
-// 4 - CADASTRAR FALTAS
+/*
+
+4 - CADASTRAR FALTAS
+
+ */
 function cadastrarFaltas() {
   //exibe lista de alunos e solicita número de matrícula
   exibirAlunos();
@@ -99,7 +128,7 @@ function cadastrarFaltas() {
       aluno.materias.filter(materia => {
         if (numeroMateria === materia.numero) {
           //solicitar número de faltas por matéria
-          let numeroFaltas = +prompt('Quantas faltas deseja cadastrar? ');
+          let numeroFaltas = solicitarNumero('faltas');
           materia.faltas += numeroFaltas;
         }
       })
@@ -121,7 +150,11 @@ function exibirMateriasCadastradas(matricula) {
   })
 }
 
-// 5 - EXIBIR ALUNOS
+/*
+
+5 - EXIBIR ALUNOS
+
+*/
 function exibirAlunos() {
   for(const aluno of alunos) {
     //exibir nome e matrícula por aluno
@@ -130,7 +163,12 @@ function exibirAlunos() {
   console.log('');
 }
 
-// 6 - EXIBIR RESULTADOS
+/*
+
+6 - EXIBIR RESULTADOS
+
+*/
+//chamada da exibição do resultado por matéria
 function exibirResultados() {
   exibirAlunos();
   let matricula = solicitarNumero('matricula');
@@ -145,6 +183,7 @@ function exibirResultados() {
   })
 }
 
+//exibição individual do resultado por matéria
 function exibirResultadoMateria(aluno) {
   /*
   indicar aluno aprovado/reprovado por matéria
@@ -156,7 +195,7 @@ function exibirResultadoMateria(aluno) {
      let nota2 = materia.nota2;
      let nota3 = materia.nota3;
      //cálculo da média
-     let media = calcularMedia(nota1, nota2, nota3);
+     let media = calcularMedia(nota1, nota2, nota3).toFixed(2);
      let faltas = materia.faltas;
      //exibir notas, média, faltas e situação de cada matéria
      console.log(`
@@ -169,11 +208,12 @@ function exibirResultadoMateria(aluno) {
   }
 }
 
+//cálculo da média individual de cada matéria
 function calcularMedia(nota1, nota2, nota3) {
-  //calcular média individual de cada matéria
   return (nota1 + nota2 + nota3) / 3;
 }
 
+//verificar situação do aluno (aprovado/reprovado)
 function verificarSituacao(media, faltas) {
   if(media < 7) {
     return 'Reprovado por nota';
@@ -184,14 +224,28 @@ function verificarSituacao(media, faltas) {
   }
 }
 
+//solicitação de valor do usuário conforme tipo de entrada
 function solicitarNumero(tipoSolicitacao) {
   let valor;
+  const pattern = /[abc]/i;
   do {
+    //número da matricula
     if (tipoSolicitacao === 'matricula') {
       valor = +prompt('Qual o número da matrícula do aluno? ');
+    //número da matéria
     } else if (tipoSolicitacao === 'materia') {
       valor = +prompt('Qual o número da matéria? ');
-    } else if (tipoSolicitacao === 'continuar') {
+    //valor da nota
+    } else if (tipoSolicitacao === 'nota') {
+      valor = +prompt('Digite o valor da nota: ');
+    //número de faltas
+    } else if (tipoSolicitacao === 'faltas') {
+      valor = +prompt('Quantas faltas deseja cadastrar? ');
+    } 
+    
+    //continuar no menu
+    if (tipoSolicitacao === 'continuar') {
+      //cadastrar nova matéria após as 3 mínimas
       do {
         valor = +prompt('Deseja cadastrar outra matéria? 1 - Sim | 0 - Não: ');
         if (valor < 0 || valor > 1) {
@@ -199,14 +253,19 @@ function solicitarNumero(tipoSolicitacao) {
         }
       } while (valor < 0 || valor > 1);
     }
-    if (typeof(valor) !== 'number') {
-      console.log('Entrada inválida. Digite apenas números.');
+
+    if (pattern.test(valor) || valor < 0) {
+      console.log('Entrada inválida. Digite apenas números a partir de 0.');
     }
-  } while (typeof(valor) !== 'number');
+  } while (pattern.test(valor) || valor < 0);
   return valor;
 }
 
-// Menu
+/*
+
+  Menu do sistema
+
+*/
 function main() {
   console.log('Bem vindo ao sistema de gerenciamento de notas\n');
   
@@ -258,6 +317,7 @@ function main() {
   } while(continuar);
 }
 
+//solicitação da opção de continuar no sistema
 function solicitarOpcaoMenu() {
   let opcao;
   console.log('Voltar ao menu? 1 - Sim | 0 - Não: ');
