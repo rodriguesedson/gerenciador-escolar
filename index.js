@@ -65,7 +65,13 @@ function cadastrarNotas() {
         if (numeroMateria === materia.numero) {
           // solicitar as 3 notas e cadastrar
           for (let i = 0; i < 3; i++) {
-            let novaNota = +prompt(`Digite a nota ${i + 1}: `);
+            let novaNota;
+            do {
+              novaNota = +prompt(`Digite a nota ${i + 1}: `);
+              if (typeof(novaNota) == NaN) {
+                console.log('Digite apenas valores numéricos.');
+              }
+            } while (typeof(novaNota) == NaN);
             materia['nota'+(i + 1)] = novaNota;
             console.log(`
             ${materia.nome}:
@@ -223,27 +229,27 @@ function main() {
     switch(opcao) {
       case 1:
         cadastrarAluno();
-        opcao = solicitarOpcaoMenu();
+        continuar = solicitarOpcaoMenu();
         break;
       case 2:
         cadastrarMaterias();
-        opcao = solicitarOpcaoMenu();
+        continuar = solicitarOpcaoMenu();
         break;
       case 3:
         cadastrarNotas();
-        opcao = solicitarOpcaoMenu();
+        continuar = solicitarOpcaoMenu();
         break;
       case 4:
         cadastrarFaltas();
-        opcao = solicitarOpcaoMenu();
+        continuar = solicitarOpcaoMenu();
         break;
       case 5:
         exibirAlunos();
-        opcao = solicitarOpcaoMenu();
+        continuar = solicitarOpcaoMenu();
         break;
       case 6:
         exibirResultados();
-        opcao = solicitarOpcaoMenu();
+        continuar = solicitarOpcaoMenu();
         break;
       case 0:
         console.log('Encerrando o sistema...');
@@ -261,7 +267,12 @@ function solicitarOpcaoMenu() {
       console.log('Digite 1 para voltar ao menu ou 0 para encerrar o sistema.');
     }
   } while (opcao < 0 || opcao > 1);
-  return opcao;
+  if (opcao == 0) {
+    console.log('Encerrando o sistema...');
+    return opcao;
+  } else {
+    return opcao;
+  }
 }
 
 main();
