@@ -54,7 +54,7 @@ function incluirMateria(aluno) {
 function cadastrarNotas() {
   //solicitar 3 notas por matéria
   exibirAlunos();
-  let matricula = +prompt('Qual a matrícula do aluno? ');
+  let matricula = solicitarMatricula();
   // procurar aluno por matrícula
   alunos.filter(aluno => {
     if (matricula === aluno.matricula) {
@@ -95,7 +95,7 @@ function exibirMateriasCadastradas(matricula) {
 // 4 - CADASTRAR FALTAS
 function cadastrarFaltas() {
   exibirAlunos();
-  let matricula = +prompt('Qual a matrícula do aluno? ');
+  let matricula = solicitarMatricula();
   // procurar aluno por matrícula
   alunos.filter(aluno => {
     if (matricula === aluno.matricula) {
@@ -124,7 +124,7 @@ function exibirAlunos() {
 // 6 - EXIBIR RESULTADOS
 function exibirResultados() {
   exibirAlunos();
-  let matricula = +prompt('Qual a matrícula do aluno? ');
+  let matricula = solicitarMatricula();
   alunos.filter(aluno => {
     if(matricula === aluno.matricula) {
       console.log('Aluno: ' + aluno.nome);
