@@ -1,15 +1,16 @@
 {
-  "dependencies": {
-    "prompt-sync": "^4.2.0"
-  },
   "name": "italents-gestao-media-notas",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  }
 }
