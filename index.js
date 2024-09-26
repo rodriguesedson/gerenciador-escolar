@@ -1,6 +1,7 @@
+const {listarAlunos, cadastrarAluno} = require('./funcoes-sistema.js');
 const prompt = require('prompt-sync')();
 
-function main() {
+async function main() {
   console.log('Bem vindo ao sistema');
   let continuar = true;
 
@@ -20,7 +21,11 @@ function main() {
         listarAlunos();
         break;
       case 2:
-        cadastrarAluno();
+        let novoAluno = {
+          nome: 'Aluno',
+          materias: []
+        }
+        cadastrarAluno(novoAluno);
         break;
       case 3:
         consultarALuno();
@@ -38,7 +43,7 @@ function main() {
         console.log('Encerrando o sistema');
         setTimeout(() => {
           console.clear();
-        }, 3000);
+        }, 2000);
         continuar = false;
         break;
       default:
