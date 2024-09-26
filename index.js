@@ -1,4 +1,4 @@
-const {listarAlunos, cadastrarAluno} = require('./funcoes-sistema.js');
+const {listarAlunos, cadastrarAluno} = require('./src/js/funcoes-sistema.js');
 const prompt = require('prompt-sync')();
 
 function main() {

@@ -5,12 +5,11 @@ function listarAlunos() {
   const db = conectarDb();
   const alunos = db.file.alunos;
   if (alunos.length === 0) {
-    console.log("Sem alunos cadastrados")
+    console.log("\nSem alunos cadastrados...")
   } else {
+    console.log("\nLista de alunos:\n")
     alunos.forEach(aluno => {
-      console.log(`
-      Matrícula: ${aluno.matricula} - Nome: ${aluno.nome}
-      `);
+      console.log(`Matrícula: ${aluno.matricula} - Nome: ${aluno.nome}`);
     })
   }
 }
@@ -28,7 +27,7 @@ function cadastrarAluno() {
 }
 
 function conectarDb() {
-  const src = 'database.json';
+  const src = 'src/database/database.json';
   const file = JSON.parse(fs.readFileSync(src));
   
   return {src: src, file: file};
