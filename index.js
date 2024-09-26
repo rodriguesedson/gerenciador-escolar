@@ -1,7 +1,7 @@
 const {listarAlunos, cadastrarAluno} = require('./funcoes-sistema.js');
 const prompt = require('prompt-sync')();
 
-async function main() {
+function main() {
   console.log('Bem vindo ao sistema');
   let continuar = true;
 
@@ -21,11 +21,7 @@ async function main() {
         listarAlunos();
         break;
       case 2:
-        let novoAluno = {
-          nome: 'Aluno',
-          materias: []
-        }
-        cadastrarAluno(novoAluno);
+        cadastrarAluno();
         break;
       case 3:
         consultarALuno();
