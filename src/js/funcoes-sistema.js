@@ -36,18 +36,25 @@ function consultarAluno() {
   exibirDadosAluno(aluno[0]);
 }
 
-// cadastrarMaterias
+// TODO: adicionar pergunta se deseja continuar o cadastro
 function cadastrarMaterias() {
   const db = conectarDb();
   const matricula = +prompt('Qual a matrícula do aluno? ');
   const indice = matricula - 1;
   
   if (matricula <= db.alunos.length) {
+    let continuar = true;
+    let materias = db.alunos[indice].materias;
     do {
       const novaMateria = criarMateria();
-  
-      db.alunos[indice].materias.push(novaMateria);
-    } while (db.alunos[indice].materias.length < 3);
+      materias.push(novaMateria);
+      if (materias.length >= 3) {
+        const opcao = +prompt('Deseja continuar o cadastro? 1 - Sim; 0 - Não: ');
+        if (opcao === 1) continuar = true;
+        else if (opcao === 0) continuar = false;
+        else console.log('Opção inválida.');
+      }
+    } while (materias.length < 3 || continuar);
     fs.writeFileSync(db.src, JSON.stringify(db.file));
   } else {
     console.log('Aluno não cadastrado.');
@@ -100,6 +107,7 @@ function exibirDadosAluno(aluno) {
   }
 }
 
+// TODO: consertar exibição das matérias
 function exibirMaterias(aluno) {
   if (aluno.materias.length > 0) {
     aluno.materias.forEach(item => {

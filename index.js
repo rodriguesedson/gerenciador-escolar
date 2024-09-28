@@ -20,29 +20,31 @@ function main() {
     let opcao = +prompt('Selecione uma opção do menu: ');
     switch(opcao) {
       case 1:
-        console.log("\n========Lista de alunos========\n");
+        console.log("\n========Lista de Alunos========\n");
         listarAlunos();
         break;
       case 2:
-        console.log("\n=====Cadastro de novo aluno=====\n");
+        console.log("\n=====Cadastro de Novo Aluno=====\n");
         cadastrarAluno();
         break;
       case 3:
-        console.log("\n========Consulta de aluno========\n");
+        console.log("\n========Consulta de Aluno========\n");
         consultarAluno();
         break;
       case 4:
-        console.log("\n=======Cadastrar matérias=======\n");
+        console.log("\n=======Cadastrar Matérias=======\n");
         cadastrarMaterias();
         break;
       case 5:
+        console.log("\n==========Inserir Notas==========\n");
         inserirNotas();
         break;
       case 6:
+        console.log("\n==========Inserir Faltas==========\n");
         inserirFaltas();
         break;
       case 0:
-        console.log('Encerrando o sistema');
+        console.log('Encerrando o sistema ***************');
         setTimeout(() => {
           console.clear();
         }, 2000);
