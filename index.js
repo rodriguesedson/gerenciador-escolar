@@ -1,4 +1,4 @@
-const {listarAlunos, cadastrarAluno, consultarAluno} = require('./src/js/funcoes-sistema.js');
+const {listarAlunos, cadastrarAluno, consultarAluno, cadastrarMaterias} = require('./src/js/funcoes-sistema.js');
 const prompt = require('prompt-sync')();
 
 function main() {
@@ -25,15 +25,14 @@ function main() {
         break;
       case 2:
         console.log("\n=====Cadastro de novo aluno=====\n");
-        const nomeAluno = prompt('Qual o nome do aluno? ');
-        cadastrarAluno(nomeAluno);
+        cadastrarAluno();
         break;
       case 3:
         console.log("\n========Consulta de aluno========\n");
-        const matricula = +prompt('Qual a matrícula do aluno? ');
-        consultarAluno(matricula);
+        consultarAluno();
         break;
       case 4:
+        console.log("\n=======Cadastrar matérias=======\n");
         cadastrarMaterias();
         break;
       case 5:
