@@ -36,7 +36,6 @@ function consultarAluno() {
   exibirDadosAluno(aluno[0]);
 }
 
-// TODO: adicionar pergunta se deseja continuar o cadastro
 function cadastrarMaterias() {
   const db = conectarDb();
   const matricula = +prompt('Qual a matrícula do aluno? ');
@@ -107,12 +106,13 @@ function exibirDadosAluno(aluno) {
   }
 }
 
-// TODO: consertar exibição das matérias
 function exibirMaterias(aluno) {
   if (aluno.materias.length > 0) {
+    let materias = ''
     aluno.materias.forEach(item => {
-      console.log(`Nome: ${item.nome} - Nota 1: ${item.nota1} - Nota 2: ${item.nota2} - Nota 3: ${item.nota3}`);
-    });
+      materias += `\r\n\tMatéria: ${item.nome}; Nota 1: ${item.nota1}; Nota 2: ${item.nota2}; Nota 3: ${item.nota3}\n`
+    })
+    return materias;
   } else {
     return "Matérias pendentes de cadastro."
   }
