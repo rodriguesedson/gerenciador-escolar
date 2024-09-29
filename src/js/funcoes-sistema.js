@@ -123,9 +123,9 @@ function criarMateria() {
   
   return {
     nome: nomeMateria,
-    nota1: '-',
-    nota2: '-',
-    nota3: '-'
+    nota1: 'Pendente',
+    nota2: 'Pendente',
+    nota3: 'Pendente'
   }
 }
 
