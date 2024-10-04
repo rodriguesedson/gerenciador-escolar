@@ -10,6 +10,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "lowdb": "^7.0.1",
     "prompt-sync": "^4.2.0"
-  }
+  },
+  "type": "module"
 }
